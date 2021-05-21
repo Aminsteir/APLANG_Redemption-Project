@@ -225,8 +225,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     builder: (_) => AlertDialog(
                       title: Text('Developed By Amin Armat'),
                       contentPadding: EdgeInsets.all(20),
-                      content: Text(
-                          'Name Of Piece: The Redemption Arc \nDate Created: 5/20/2021 \nTechnique: Website Developed w/ Flutter \nTheme: Redemption\n\nProject Description: I wanted to make something that includes elements of redemption, and this was one of the outcomes I thought of. You see a teen named John going throughout high school and making decisions, decisions that can have a big impact on the world. Depending on what John does, he could find redemption, redeem other individuals, or just fail altogether.\n\nThe use of all images on this website are subject to the copyright owner(s). If there is an issue, contact me at aminsteir@gmail.com'),
+                      content: SingleChildScrollView(
+                        child: Text(
+                            'Name Of Piece: The Redemption Arc \nDate Created: 5/20/2021 \nTechnique: Website Developed w/ Flutter \nTheme: Redemption\n\nProject Description: I wanted to make something that includes elements of redemption, and this was one of the outcomes I thought of. You see a teen named John going throughout high school and making decisions, decisions that can have a big impact on the world. Depending on what John does, he could find redemption, redeem other individuals, or just fail altogether.\n\nThe use of all images on this website are subject to the copyright owner(s). If there is an issue, contact me at aminsteir@gmail.com.'),
+                      ),
                       actions: [
                         IconButton(
                           onPressed: () => {Navigator.pop(context)},
