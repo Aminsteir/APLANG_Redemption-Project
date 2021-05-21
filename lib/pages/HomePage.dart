@@ -144,91 +144,109 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (curState.image.isNotEmpty)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      '${curState.image}',
-                      height: 300,
-                      width: 300,
-                      alignment: Alignment.center,
-                      fit: BoxFit.cover,
-                    ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (curState.image.isNotEmpty)
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            '${curState.image}',
+                            height: 300,
+                            width: 300,
+                            alignment: Alignment.center,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      Padding(padding: EdgeInsets.all(20)),
+                      Text(
+                        '${curState.title}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Padding(padding: EdgeInsets.all(10)),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Text(
+                          '${curState.description}',
+                          overflow: TextOverflow.visible,
+                        ),
+                      ),
+                    ],
                   ),
-                Padding(padding: EdgeInsets.all(20)),
-                Text(
-                  '${curState.title}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Padding(padding: EdgeInsets.all(10)),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Text(
-                    '${curState.description}',
-                    overflow: TextOverflow.visible,
+                  Padding(padding: EdgeInsets.all(20)),
+                  Wrap(
+                    runSpacing: 5.0,
+                    spacing: 5.0,
+                    children: this.curState.options.map((var e) {
+                      Option option = e as Option;
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: ElevatedButton(
+                          onPressed: () => {_madeChoice(option)},
+                          child: Text('${option.text}'),
+                          style: ButtonStyle(
+                            padding:
+                                MaterialStateProperty.all(EdgeInsets.all(20)),
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(20)),
-            Wrap(
-              runSpacing: 5.0,
-              spacing: 5.0,
-              children: this.curState.options.map((var e) {
-                Option option = e as Option;
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: ElevatedButton(
-                    onPressed: () => {_madeChoice(option)},
-                    child: Text('${option.text}'),
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                    ),
+                  Container(
+                    height: 40,
                   ),
-                );
-              }).toList(),
+                  if (depth != 0)
+                    ElevatedButton(
+                        onPressed: () => {_reset()},
+                        child: Text('Reset To Start'),
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(20)),
+                        )),
+                ],
+              ),
             ),
-            Container(
-              height: 40,
-            ),
-            if (depth != 0)
-              ElevatedButton(
-                  onPressed: () => {_reset()},
-                  child: Text('Reset To Start'),
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-                  )),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.help_outline_rounded),
-        onPressed: () => {
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: Text('Developed By Amin Armat'),
-              contentPadding: EdgeInsets.all(20),
-              content: Text(
-                  'Name Of Piece: John\'s Redemption Arc \nDate Created: 5/20/2021 \nTechnique: Website Developed W/ Flutter \nTheme: Redemption\n\n The usage of all images on this website are subject to the copyright owner(s). If there is an issue, contact me at aminsteir@gmail.com'),
-              actions: [
-                IconButton(
-                  onPressed: () => {Navigator.pop(context)},
-                  icon: Icon(Icons.close),
-                ),
-              ],
-            ),
-            barrierDismissible: true,
-            barrierColor: Colors.blueAccent.withAlpha(175),
           ),
-        },
+          Positioned(
+            right: 30,
+            top: 25,
+            child: Container(
+              child: ElevatedButton.icon(
+                onPressed: () => {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('Developed By Amin Armat'),
+                      contentPadding: EdgeInsets.all(20),
+                      content: Text(
+                          'Name Of Piece: The Redemption Arc \nDate Created: 5/20/2021 \nTechnique: Website Developed w/ Flutter \nTheme: Redemption\n\nProject Description: I wanted to make something that includes elements of redemption, and this was one of the outcomes I thought of. You see a teen named John going throughout high school and making decisions, decisions that can have a big impact on the world. Depending on what John does, he could find redemption, redeem other individuals, or just fail altogether.\n\nThe use of all images on this website are subject to the copyright owner(s). If there is an issue, contact me at aminsteir@gmail.com'),
+                      actions: [
+                        IconButton(
+                          onPressed: () => {Navigator.pop(context)},
+                          icon: Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                    barrierDismissible: true,
+                    barrierColor: Colors.blueAccent.withAlpha(175),
+                  ),
+                },
+                icon: Icon(Icons.airplay_rounded),
+                label: Text('Project Info'),
+                autofocus: true,
+                style: ButtonStyle(
+                    padding: MaterialStateProperty.all(EdgeInsets.all(20))),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
