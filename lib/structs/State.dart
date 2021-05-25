@@ -1,10 +1,10 @@
 class TextState {
   String title;
   String description;
-  String image;
+  String mainImage;
   var options = [];
   bool isEnd;
 
   TextState(this.title, this.description, this.options,
-      {this.image = "", this.isEnd = false});
+      {this.mainImage = "", this.isEnd = false});
 }

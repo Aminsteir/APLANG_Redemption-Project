@@ -1,4 +1,4 @@
-import 'State.dart';
+import '../structs/State.dart';
 
 class Option {
   String text;
