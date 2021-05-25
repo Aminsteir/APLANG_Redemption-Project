@@ -293,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       this.finalPage = true;
                     })
                   },
-                  child: SelectableText('Your Path'),
+                  child: Text('Your Path'),
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.all(20)),
                   ),
