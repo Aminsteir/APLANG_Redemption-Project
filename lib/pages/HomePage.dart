@@ -162,40 +162,53 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          SelectableText(
+            'Your Story:',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Divider(
+            height: 40,
+            thickness: 1,
+            indent: 60,
+            endIndent: 60,
+          ),
+          Wrap(
+            alignment: WrapAlignment.center,
+            direction: Axis.horizontal,
+            runSpacing: 40,
+            spacing: 20,
             children: this.storyPath.map((e) {
               var i = e as StoryPath;
-              return Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(
-                        '${i.image}',
-                        height: 300,
-                        width: 300,
-                        alignment: Alignment.center,
-                        fit: BoxFit.cover,
-                      ),
+              return Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(
+                      '${i.image}',
+                      height: 300,
+                      width: 300,
+                      alignment: Alignment.center,
+                      fit: BoxFit.cover,
                     ),
-                    Divider(height: 10, color: Colors.transparent),
-                    Text('${i.choiceChosen}'),
-                  ],
-                ),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 0,
+                  ),
+                  SelectableText('${i.choiceChosen}'),
+                ],
               );
             }).toList(),
           ),
           Divider(
             height: 40,
             thickness: 1,
-            indent: MediaQuery.of(context).size.width / 6,
-            endIndent: MediaQuery.of(context).size.width / 6,
+            indent: 60,
+            endIndent: 60,
           ),
           ElevatedButton(
             onPressed: () => {_reset()},
-            child: Text('Reset To Start'),
+            child: Text('Restart'),
             style: ButtonStyle(
               padding: MaterialStateProperty.all(EdgeInsets.all(20)),
             ),
@@ -223,20 +236,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-        Divider(
-          height: 10,
-          color: Colors.transparent,
-        ),
-        Text(
+        Container(height: 10),
+        SelectableText(
           '${curState.title}',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        Divider(height: 20, color: Colors.transparent),
-        Text(
+        Container(height: 20),
+        SelectableText(
           '${curState.description}',
-          overflow: TextOverflow.visible,
         ),
-        Divider(height: 20, color: Colors.transparent),
+        Container(height: 20),
         Wrap(
           runSpacing: 5.0,
           spacing: 5.0,
@@ -284,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       this.finalPage = true;
                     })
                   },
-                  child: Text('Your Path'),
+                  child: SelectableText('Your Path'),
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.all(20)),
                   ),
@@ -304,7 +313,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: getScreen(context),
+                child: SingleChildScrollView(child: getScreen(context)),
               ),
             ),
           ),
@@ -317,10 +326,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: Text('Developed By Amin Armat'),
+                      title: SelectableText('Developed By Amin Armat'),
                       contentPadding: EdgeInsets.all(20),
                       content: SingleChildScrollView(
-                        child: Text(
+                        child: SelectableText(
                             'Name Of Piece: The Redemption Arc \nDate Created: 5/20/2021 \nTechnique: Website Developed w/ Flutter \nTheme: Redemption\n\nProject Description: I wanted to make something that includes elements of redemption, and this was one of the outcomes I thought of. You see a teen named John going throughout high school and making decisions, decisions that can have a big impact on the world. Depending on what John does, he could find redemption, redeem other individuals, or just fail altogether.\n\nThe use of all images on this website are subject to the copyright owner(s). If there is an issue, contact me at aminsteir@gmail.com.'),
                       ),
                       actions: [
